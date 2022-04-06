@@ -30,15 +30,17 @@ export default defineComponent({
 	.ub-text-no-contact {
 		margin-top: 1.5rem;
 	}
-
-	@media (max-width: 480px) {
-		.ub-empty-schedule-img {
-			width: 60%;
-		}
-		.ub-text-no-contact {
-			font-size: 0.6rem;
-			margin-top: 0.8rem;
-		}
+}
+@media (max-width: 480px) {
+	.ub-empty-schedule-wrapper {
+		margin-top: 3rem;
+	}
+	.ub-empty-schedule-img {
+		width: 60%;
+	}
+	.ub-text-no-contact {
+		font-size: 0.6rem;
+		margin-top: 0.8rem;
 	}
 }
 </style>
