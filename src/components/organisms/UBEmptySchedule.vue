@@ -2,6 +2,7 @@
 	<div class="ub-empty-schedule-wrapper">
 		<UBEmptyScheduleImageVue class="ub-empty-schedule-img" />
 		<UBTextNoContact class="ub-text-no-contact" />
+		<UBCreateContactButton />
 	</div>
 </template>
 
@@ -9,12 +10,14 @@
 import { defineComponent } from 'vue';
 import UBEmptyScheduleImageVue from '@molecules/UBEmptyScheduleImage.vue';
 import UBTextNoContact from '@molecules/UBTextNoContact.vue';
+import UBCreateContactButton from '@molecules/UBCreateContactButton.vue';
 
 export default defineComponent({
 	name: 'UBEmptySchedule',
 	components: {
 		UBEmptyScheduleImageVue,
-		UBTextNoContact
+		UBTextNoContact,
+		UBCreateContactButton
 	}
 });
 </script>
