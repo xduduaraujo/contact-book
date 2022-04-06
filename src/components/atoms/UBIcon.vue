@@ -10,11 +10,9 @@ export default defineComponent({
 	props: {
 		width: {
 			type: String,
-			required: true,
 		},
 		height: {
 			type: String,
-			required: true,
 		},
 		alt: {
 			type: String,
@@ -23,7 +21,7 @@ export default defineComponent({
 		image: {
 			type: String,
 			required: true,
-		}
+		},
 	},
 });
 </script>

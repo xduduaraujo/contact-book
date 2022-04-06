@@ -3,27 +3,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-	name: 'UBTextField',
+	name: "UBTextField",
 	props: {
 		name: {
 			type: String,
-			required: true
+			required: true,
 		},
 		placeholder: {
-			type: String
-		}
-	}
+			type: String,
+		},
+	},
 });
 </script>
 
 <style lang="scss" scoped>
 .search-field {
-	width: 1032px;
+	width: 100%;
 	height: 32px;
-	margin: 0 0 0 228px;
 	padding: 7px 8px 6px;
 	border-radius: 4px;
 	border: none;

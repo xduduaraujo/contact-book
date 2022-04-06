@@ -7,15 +7,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import UBLogo from '@molecules/UBLogo.vue'
-import UBSearchInput from '@molecules/UBSearchInput.vue'
+import UBLogo from "@molecules/UBLogo.vue";
+import UBSearchInput from "@molecules/UBSearchInput.vue";
 
 export default defineComponent({
 	name: "UBScheduleHeader",
 	components: {
 		UBLogo,
-		UBSearchInput
-	}
+		UBSearchInput,
+	},
 });
 </script>
 
@@ -23,6 +23,13 @@ export default defineComponent({
 .wrapper {
 	display: flex;
 	padding: 10px;
-	min-width: 90vw;
+}
+@media (max-width: 480px) {
+	.wrapper {
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: column;
+		min-height: 100px;
+	}
 }
 </style>
