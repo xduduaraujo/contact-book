@@ -1,14 +1,14 @@
-import { createRouter, createWebHistory } from "vue-router";
-import UBEmptySchedule from "@templates/UBEmptySchedule.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import UBHome from '@/components/templates/UBHome.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      name: "home",
-      component: UBEmptySchedule,
-    },
+      path: '/',
+      name: 'home',
+      component: UBHome
+    }
     // {
     //   path: "/",
     //   name: "emptySchedule",
@@ -17,7 +17,7 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import("@templates/UBEmptySchedule.vue"),
     // },
-  ],
+  ]
 });
 
 export default router;
