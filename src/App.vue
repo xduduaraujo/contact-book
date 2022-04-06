@@ -4,23 +4,21 @@ import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 </script>
 
 <template>
-  <UBScheduleHeader />
-  <RouterView />
+	<UBScheduleHeader />
+	<RouterView />
 </template>
 
 <style>
-@import '@/assets/base.css';
+@import "@/assets/base.css";
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1rem;
-
-  font-weight: normal;
+	max-width: 1440px;
+	margin: 1rem;
+	font-weight: normal;
 }
 
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+	line-height: 1.5;
+	max-height: 100vh;
 }
 </style>
