@@ -1,6 +1,6 @@
 <template>
 	<div class="input-container">
-		<UBTextField name="searchInput" placeholder="Buscar..." class="ub-text-field" />
+		<UBTextField name="searchInput" placeholder="Buscar..." class="ub-search-input" />
 		<UBIcon alt="Search Icon" :image="searchIcon" width="16" height="16" class="ub-search-icon" />
 	</div>
 </template>
@@ -25,12 +25,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @media (min-width: 1440px) {
-	.ub-text-field {
+	.ub-search-input {
 		margin: 0 0 0 14.25rem;
 	}
 }
 @media (min-width: 480px) and (max-width: 1439px) {
-	.ub-text-field {
+	.ub-search-input {
 		margin: 0 0 0 3.75rem;
 	}
 }
