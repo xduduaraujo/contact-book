@@ -1,7 +1,7 @@
 <template>
 	<input
 		type="text"
-		:style="`width:${width}`"
+		:style="`width:${width}; background-color:${backgroundColor}; border:${border}`"
 		:name="name"
 		:id="name"
 		class="ub-text-field"
@@ -25,7 +25,13 @@ export default defineComponent({
 		width: {
 			type: String,
 			default: '100%'
-		}
+		},
+		border: {
+			type: String,
+		},
+		backgroundColor: {
+			type: String
+		},
 	}
 });
 </script>
@@ -55,5 +61,6 @@ export default defineComponent({
 
 input:focus {
 	outline: solid 1px var(--ub-orange);
+	border: none !important;
 }
 </style>

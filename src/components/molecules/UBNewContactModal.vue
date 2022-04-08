@@ -5,7 +5,13 @@
 		<UBForm height="227.5px">
 			<p v-for="input in inputs">
 				<UBLabel :name="input" />
-				<UBTextField width="384px" :name="input" class="ub-text-field" />
+				<UBTextField
+					width="384px"
+					:name="input"
+					class="ub-text-field"
+					backgroundColor="#ffffff"
+					border="solid 1px #c0c3d2"
+				/>
 			</p>
 		</UBForm>
 
