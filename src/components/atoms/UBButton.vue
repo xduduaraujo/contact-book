@@ -1,5 +1,5 @@
 <template>
-	<button type="button" :color="color" :background-color="backgroundColor">
+	<button type="button" :color="color" :background-color="backgroundColor" @click="handleClick()">
 		<slot />
 		<span>{{ text }}</span>
 	</button>
@@ -22,6 +22,10 @@ export default defineComponent({
 		text: {
 			type: String,
 			required: true
+		},
+		handleClick: {
+			type: Function,
+			required: true
 		}
 	}
 });
@@ -40,17 +44,10 @@ button {
 	border-radius: 20px;
 	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.16);
 	border: 1px rgba(255, 255, 255, 0.16);
+	justify-content: space-evenly;
 }
 
-span {
-	margin-left: 0.5rem;
-	margin-top: 0.75rem;
-	margin-bottom: 0.75rem;
-}
-
-slot {
-	margin-left: 1rem;
-	margin-top: 0.75rem;
-	margin-bottom: 0.75rem;
+button:hover {
+	cursor: pointer;
 }
 </style>

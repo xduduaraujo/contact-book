@@ -1,5 +1,9 @@
 <template>
-	<UBButton text="Criar contato" class="ub-create-contact-button">
+	<UBButton
+		text="Criar contato"
+		class="ub-create-contact-button"
+		:handleClick="() => $emit('showModal')"
+	>
 		<UBIcon alt="Plus Icon" :image="plusIcon" width="16" height="16" />
 	</UBButton>
 </template>
@@ -16,6 +20,7 @@ export default defineComponent({
 		UBButton,
 		UBIcon
 	},
+
 	setup() {
 		return { plusIcon }
 	}

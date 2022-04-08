@@ -1,48 +1,59 @@
 <template>
-  <input type="text" :name="name" :id="name" class="search-field" :placeholder="placeholder" />
+	<input
+		type="text"
+		:style="`width:${width}`"
+		:name="name"
+		:id="name"
+		class="ub-text-field"
+		:placeholder="placeholder"
+	/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'UBTextField',
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    placeholder: {
-      type: String
-    }
-  }
+	name: 'UBTextField',
+	props: {
+		name: {
+			type: String,
+			required: true
+		},
+		placeholder: {
+			type: String
+		},
+		width: {
+			type: String,
+			default: '100%'
+		}
+	}
 });
 </script>
 
 <style lang="scss" scoped>
-.search-field {
-  width: 100%;
-  height: 32px;
-  padding: 7px 8px 6px;
-  border-radius: 4px;
-  border: none;
-  background-color: var(--ub-pale-grey);
+.ub-text-field {
+	width: 100%;
+	height: 32px;
+	padding: 7px 8px 6px;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--ub-pale-grey);
 }
-.search-field::placeholder {
-  width: 63px;
-  height: 19px;
-  margin: 0 937px 0 0;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: var(--ub-bluey-grey);
+.ub-text-field::placeholder {
+	width: 63px;
+	height: 19px;
+	margin: 0 937px 0 0;
+	font-family: Roboto;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: var(--ub-bluey-grey);
 }
 
 input:focus {
-  outline: solid 1px var(--ub-orange);
+	outline: solid 1px var(--ub-orange);
 }
 </style>

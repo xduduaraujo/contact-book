@@ -12,7 +12,7 @@ import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 @import "@/assets/base.css";
 
 #app {
-	max-width: 1440px;
+	max-width: 100vw;
 	margin: 1rem;
 	font-weight: normal;
 }
