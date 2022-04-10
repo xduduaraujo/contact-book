@@ -1,17 +1,20 @@
 <template>
 	<div class="ub-empty-schedule-wrapper">
 		<UBEmptySchedule />
+		<UBNewContact />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
+import UBNewContact from '@organisms/UBNewContact.vue';
 
 export default defineComponent({
 	name: 'UBHome',
 	components: {
-		UBEmptySchedule
+		UBEmptySchedule,
+		UBNewContact
 	},
 });
 </script>

@@ -1,12 +1,16 @@
 <template>
-	<UBEmptyScheduleImage class="ub-empty-schedule-img" />
-	<UBTextNoContact class="ub-text-no-contact" />
+	<UBCreateContactButton @showModal="showModal" />
+	<UBNewContactModal
+		:handleSave="handleSave"
+		:handleCancel="handleCancel"
+		:isVisible="showNewContactModal"
+		:contact="contactData"
+		@updateContact="updateContact"
+	/>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import UBEmptyScheduleImage from '@molecules/UBEmptyScheduleImage.vue';
-import UBTextNoContact from '@molecules/UBTextNoContact.vue';
 import UBNewContactModal from '@molecules/UBNewContactModal.vue';
 import UBCreateContactButton from '@molecules/UBCreateContactButton.vue';
 import type ContactData from '@/models/contactData';
@@ -15,8 +19,6 @@ import type ContactData from '@/models/contactData';
 export default defineComponent({
 	name: 'UBEmptySchedule',
 	components: {
-		UBEmptyScheduleImage,
-		UBTextNoContact,
 		UBNewContactModal,
 		UBCreateContactButton
 	},
