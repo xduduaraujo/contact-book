@@ -1,8 +1,9 @@
 import { Rotas } from '@/enums/Rotas';
-import router from '@/router';
+import { useRouter } from 'vue-router';
 
 const getContactList = () => JSON.parse(localStorage.getItem('contactData') as string);
 const contactListHasItems = () => !!getContactList();
+const router = useRouter()
 
 const LocalStorageUtils = {
   getContactList: () => getContactList(),

@@ -1,3 +1,0 @@
-const RouterUtils = {};
-
-export { RouterUtils };
