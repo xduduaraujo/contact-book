@@ -1,36 +1,32 @@
 <template>
-	<UBButton
-		text="Criar contato"
-		class="ub-create-contact-button"
-		:handleClick="() => $emit('showModal')"
-	>
-		<UBIcon alt="Plus Icon" :image="plusIcon" width="16" height="16" />
-	</UBButton>
+  <UBButton text="Criar contato" class="ub-create-contact-button" :handleClick="() => $emit('showModal')">
+    <UBIcon alt="Plus Icon" :image="plusIcon" width="16" height="16" />
+  </UBButton>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import UBButton from '@atoms/UBButton.vue';
 import UBIcon from '@atoms/UBIcon.vue';
-import plusIcon from '@/assets/plus.svg'
+import plusIcon from '@/assets/plus.svg';
 
 export default defineComponent({
-	name: 'UBCreateContactButton',
-	components: {
-		UBButton,
-		UBIcon
-	},
+  name: 'UBCreateContactButton',
+  components: {
+    UBButton,
+    UBIcon
+  },
 
-	setup() {
-		return { plusIcon }
-	}
+  setup() {
+    return { plusIcon };
+  }
 });
 </script>
 
 <style lang="scss" scoped>
 .ub-create-contact-button {
-	color: var(--ub-orange);
-	font-size: 0.875rem;
-	background-color: var(--ub-light-yellowish-green);
+  color: var(--ub-orange);
+  font-size: 0.875rem;
+  background-color: var(--ub-light-yellowish-green);
 }
 </style>
