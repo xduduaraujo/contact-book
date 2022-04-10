@@ -1,5 +1,5 @@
 <template>
-  <UBCreateContactButton @showModal="showModal" />
+  <UBCreateContactButton @showModal="showModal" class="ub-create-contact-button" />
   <UBNewContactModal
     :handleSave="handleSave"
     :handleCancel="handleCancel"
@@ -14,6 +14,8 @@ import { defineComponent, ref } from 'vue';
 import UBNewContactModal from '@molecules/UBNewContactModal.vue';
 import UBCreateContactButton from '@molecules/UBCreateContactButton.vue';
 import type ContactData from '@/models/contactData';
+import { useRouter } from 'vue-router';
+import { Rotas } from '@/enums/Rotas';
 
 export default defineComponent({
   name: 'UBEmptySchedule',
@@ -37,6 +39,8 @@ export default defineComponent({
       localStorage.setItem('contactData', JSON.stringify(contactDataArray));
 
       showNewContactModal.value = false;
+
+      useRouter().push(Rotas.UBContacts);
     }
 
     function handleCancel(): void {

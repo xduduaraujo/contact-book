@@ -38,7 +38,6 @@ button {
   align-items: center;
   width: 144px;
   height: 40px;
-  margin-top: 1.5rem;
   font-family: 'Roboto';
   font-weight: 500;
   border-radius: 20px;

@@ -1,6 +1,7 @@
 <template>
   <header class="wrapper">
     <UBLogo />
+    <UBNewContact v-if="showNewContactOrganism" />
     <UBSearchInput />
   </header>
 </template>
@@ -9,12 +10,20 @@
 import { defineComponent } from 'vue';
 import UBLogo from '@molecules/UBLogo.vue';
 import UBSearchInput from '@molecules/UBSearchInput.vue';
+import UBNewContact from '@organisms/UBNewContact.vue';
 
 export default defineComponent({
   name: 'UBScheduleHeader',
   components: {
     UBLogo,
-    UBSearchInput
+    UBSearchInput,
+    UBNewContact
+  },
+  props: {
+    showNewContactOrganism: {
+      type: Boolean,
+      default: false
+    }
   }
 });
 </script>

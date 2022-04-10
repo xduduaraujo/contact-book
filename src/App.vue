@@ -4,12 +4,12 @@ import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 </script>
 
 <template>
-  <UBScheduleHeader />
   <RouterView />
 </template>
 
-<style>
+<style lang="scss">
 @import '@/assets/base.css';
+@import '@/assets/overrides.scss';
 
 #app {
   max-width: 100vw;

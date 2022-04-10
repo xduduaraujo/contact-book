@@ -3,7 +3,7 @@
     <UBTitle text="Criar novo contato" class="modal-header" />
 
     <UBForm height="227.5px">
-      <p v-for="item in inputs">
+      <p v-for="item in inputs" :key="item.name">
         <UBLabel :name="item.label" />
         <UBTextField
           width="384px"
@@ -35,7 +35,7 @@ import UBFooter from '@atoms/UBFooter.vue';
 import UBButton from '@atoms/UBButton.vue';
 
 export default defineComponent({
-  name: 'UBNewContactForm',
+  name: 'UBNewContactModal',
   components: {
     UBForm,
     UBModal,

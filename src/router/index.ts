@@ -1,13 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import UBHome from '@/components/templates/UBHome.vue';
+import UBHome from '@templates/UBHome.vue';
+import UBContacts from '@templates/UBContacts.vue';
+import { Rotas } from '@/enums/Rotas';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: Rotas.UBHome,
+      name: 'UBHome',
       component: UBHome
+    },
+    {
+      path: Rotas.UBContacts,
+      name: 'UBContacts',
+      component: UBContacts
     }
     // {
     //   path: "/",

@@ -1,30 +1,22 @@
 <template>
-  <UBScheduleHeader />
+  <UBScheduleHeader :showNewContactOrganism="true" />
 
   <div class="ub-empty-schedule-wrapper">
     <UBEmptySchedule />
-    <UBNewContact />
+    dasdsadas
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
 import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
-import UBNewContact from '@organisms/UBNewContact.vue';
-import { defineComponent, onMounted } from 'vue';
-import { LocalStorageUtils } from '@/utils/local-storage-utils';
 
 export default defineComponent({
-  name: 'UBHome',
+  name: 'UBContacts',
   components: {
     UBEmptySchedule,
-    UBNewContact,
     UBScheduleHeader
-  },
-  setup() {
-    onMounted(() => {
-      LocalStorageUtils.pushToContactListIfHaveContactsInLocalStorage();
-    });
   }
 });
 </script>
