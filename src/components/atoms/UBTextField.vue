@@ -5,12 +5,13 @@
 		:name="name"
 		:id="name"
 		class="ub-text-field"
+		v-model="text"
 		:placeholder="placeholder"
 	/>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
 	name: 'UBTextField',
@@ -32,6 +33,11 @@ export default defineComponent({
 		backgroundColor: {
 			type: String
 		},
+	},
+	setup() {
+		const text = ref('')
+
+		return { text }
 	}
 });
 </script>

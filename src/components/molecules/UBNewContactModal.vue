@@ -3,14 +3,16 @@
 		<UBTitle text="Criar novo contato" class="modal-header" />
 
 		<UBForm height="227.5px">
-			<p v-for="input in inputs">
-				<UBLabel :name="input" />
+			<p v-for="item in inputs">
+				<UBLabel :name="item.label" />
 				<UBTextField
 					width="384px"
-					:name="input"
+					:name="item.input"
 					class="ub-text-field"
 					backgroundColor="#ffffff"
 					border="solid 1px #c0c3d2"
+					v-model="text"
+					@change="() => $emit('updateContact', { key: item.input, value: text })"
 				/>
 			</p>
 		</UBForm>
@@ -24,7 +26,7 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import UBForm from '@atoms/UBForm.vue';
 import UBModal from '@atoms/UBModal.vue';
 import UBLabel from '@atoms/UBLabel.vue';
@@ -58,12 +60,21 @@ export default defineComponent({
 		showModal: {
 			type: Boolean,
 			default: false
+		},
+		contact: {
+			type: Object
 		}
 	},
 	setup() {
-		const inputs = ['Nome', 'E-mail', 'Telefone']
+		const inputs = [{ input: 'nome', label: 'Nome' }, { input: 'email', label: 'E-mail' }, { input: 'telefone', label: 'Telefone' }]
+		const text = ref('')
 
-		return { inputs }
+		onMounted(() => {
+			text.value = ''
+		})
+
+
+		return { inputs, text }
 	}
 });
 </script>

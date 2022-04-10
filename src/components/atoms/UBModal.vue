@@ -1,5 +1,5 @@
 <template>
-	<div class="ub-modal-backdrop" v-show="isVisible">
+	<div class="ub-modal-backdrop" v-if="isVisible">
 		<div
 			class="ub-modal"
 			:style="`height:${height}; width:${width}`"
