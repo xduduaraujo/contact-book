@@ -32,6 +32,11 @@ export default defineComponent({
 		const showNewContactModal = ref(false)
 		const contactData = ref({} as ContactData)
 
+
+		function updateContact({ key, value }: { key: string, value: string }): void {
+			contactData.value = { ...contactData.value, [key]: value }
+		}
+
 		function handleSave(): void {
 			let contactDataArray = new Array<ContactData>();
 
@@ -45,7 +50,6 @@ export default defineComponent({
 		function handleCancel(): void {
 			showNewContactModal.value = false
 		}
-
 
 		function showModal(): void {
 			showNewContactModal.value = true;
