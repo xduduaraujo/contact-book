@@ -4,12 +4,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onMounted, provide, reactive } from 'vue';
+import { defineComponent, inject } from 'vue';
 import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
 import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 import UBContactList from '@organisms/UBContactList.vue';
 import type ContactData from '@/models/contactData';
-import { LocalStorageUtils } from '@/utils/local-storage-utils';
 
 export default defineComponent({
 	name: 'UBContacts',
