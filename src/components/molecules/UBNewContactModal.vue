@@ -11,7 +11,8 @@
 					class="ub-text-field"
 					backgroundColor="#ffffff"
 					border="solid 1px #c0c3d2"
-					v-model="contactData[item.input]" />
+					v-model="contactData[item.input]"
+					v-maska="item.mask" />
 			</p>
 		</UBForm>
 
@@ -32,6 +33,7 @@ import UBTitle from '@atoms/UBTitle.vue';
 import UBFooter from '@atoms/UBFooter.vue';
 import UBButton from '@atoms/UBButton.vue';
 import type ContactData from '@/models/contactData';
+import customMask from '@/utils/custom-mask-utils'
 
 export default defineComponent({
 	name: 'UBNewContactModal',
@@ -56,9 +58,9 @@ export default defineComponent({
 	},
 	setup() {
 		const inputs = [
-			{ input: 'name', label: 'Nome' },
-			{ input: 'email', label: 'E-mail' },
-			{ input: 'telephone', label: 'Telefone' }
+			{ input: 'name', label: 'Nome', mask: customMask.constructor('N', 15) },
+			{ input: 'email', label: 'E-mail', mask: customMask.constructor('E', 40) },
+			{ input: 'telephone', label: 'Telefone', mask: '(##) #####-####' }
 		];
 
 		const contactData = inject('contactData') as ContactData
