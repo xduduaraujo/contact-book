@@ -1,13 +1,14 @@
 <template>
 	<UBScheduleHeader :showNewContactOrganism="true" class="ub-schedule-header" />
-	<UBContactList :contacts="reactiveContacts"/>
+	<UBContactList :contacts="contacts"/>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, provide, reactive } from 'vue';
+import { computed, defineComponent, inject, onMounted, provide, reactive } from 'vue';
 import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
 import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 import UBContactList from '@organisms/UBContactList.vue';
+import type ContactData from '@/models/contactData';
 import { LocalStorageUtils } from '@/utils/local-storage-utils';
 
 export default defineComponent({
@@ -18,17 +19,9 @@ export default defineComponent({
 		UBContactList
 	},
 	setup() {
-		onMounted(() => {
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
-		});
+		const contacts = inject('reactiveContacts') as ContactData[]
 
-		const contacts = LocalStorageUtils.getContactList()
-
-		const reactiveContacts = reactive(contacts)
-
-		provide('reactiveContacts', reactiveContacts)
-
-		return { reactiveContacts }
+		return { contacts }
 	}
 });
 </script>

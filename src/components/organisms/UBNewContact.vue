@@ -1,21 +1,17 @@
 <template>
 	<UBCreateContactButton @showModal="showModal" class="ub-contact-button" />
 	<UBNewContactModal
-		:handleSave="handleSave"
 		:handleCancel="handleCancel"
 		:isVisible="showNewContactModal"
-		:contact="contactData"
-		@updateContact="updateContact"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, provide, reactive, ref, inject } from 'vue';
 import UBNewContactModal from '@molecules/UBNewContactModal.vue';
 import UBCreateContactButton from '@molecules/UBCreateContactButton.vue';
-import { LocalStorageUtils } from '@/utils/local-storage-utils';
-import { useRouter } from 'vue-router';
 import type ContactData from '@/models/contactData';
+import { LocalStorageUtils } from '@/utils/local-storage-utils';
 
 export default defineComponent({
 	name: 'UBEmptySchedule',
@@ -24,21 +20,23 @@ export default defineComponent({
 		UBCreateContactButton
 	},
 	setup() {
+		const contactData = reactive({} as ContactData);
 		const showNewContactModal = ref(false);
-		const contactData = ref({} as ContactData);
 		const contactDataArray = inject('reactiveContacts') as ContactData[] || new Array<ContactData>()
 
+		const updateContact = (id: number, contactDataParam: ContactData) => {
+			const indexOfContactInArray = contactDataArray.findIndex((contactData: ContactData) => contactData.id === id)
 
-		function updateContact({ key, value }: { key: string; value: string }): void {
-			contactData.value = { ...contactData.value, [key]: value };
+			contactDataArray[indexOfContactInArray] = contactDataParam
 		}
 
 		function handleSave(): void {
-			(contactDataArray as any).push(contactData.value);
+			const contactId = contactDataArray.length ?? 0
+			contactDataArray.push({ id: contactId, ...contactData });
 			localStorage.setItem('contactData', JSON.stringify(contactDataArray));
 
-			showNewContactModal.value = false;
 
+			showNewContactModal.value = false;
 			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage()
 		}
 
@@ -50,7 +48,10 @@ export default defineComponent({
 			showNewContactModal.value = true;
 		}
 
-		return { handleSave, handleCancel, showModal, showNewContactModal, contactData, updateContact };
+		provide('contactData', contactData)
+		provide('handleContactSave', handleSave)
+
+		return { handleCancel, showModal, showNewContactModal };
 	}
 });
 </script>

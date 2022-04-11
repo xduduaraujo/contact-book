@@ -1,8 +1,9 @@
 import { Rotas } from '@/enums/Rotas';
+import type ContactData from '@/models/contactData';
 import router from '@/router';
 
-const getContactList = () => (localStorage.contactData ? JSON.parse(localStorage.contactData) : null);
-const contactListHasItems = () => !!getContactList();
+const getContactList = (): ContactData[] => (localStorage.contactData ? JSON.parse(localStorage.contactData) : null);
+const contactListHasItems = () => !!getContactList() && getContactList().length > 0;
 
 const LocalStorageUtils = {
 	getContactList: () => getContactList(),

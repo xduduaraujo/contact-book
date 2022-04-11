@@ -4,6 +4,8 @@
 		<UBText text="Contatos" class="ub-text" />
 		<UBText text="E-mail" class="ub-text" />
 		<UBText text="Telefone" class="ub-text" />
+		<div class="ub-icons" />
+		<div class="ub-icons" />
 	</div>
 </template>
 
@@ -34,7 +36,7 @@ export default defineComponent({
 	font-size: 13px;
 	color: var(--ub-bluey-grey);
 	flex: 4;
-	margin: 1rem 0 0 47px;
+	margin: 1rem 0 0 0;
 	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -46,5 +48,13 @@ export default defineComponent({
 	max-width: 48px;
 	min-width: 40px;
 	flex: 1.5
+}
+
+.ub-icons {
+	max-width: 16px;
+	flex: 0.5;
+	position: relative;
+	text-align: center;
+	margin: 12px 12px 12px 12px;
 }
 </style>

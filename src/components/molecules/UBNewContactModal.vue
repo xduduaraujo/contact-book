@@ -11,20 +11,19 @@
 					class="ub-text-field"
 					backgroundColor="#ffffff"
 					border="solid 1px #c0c3d2"
-					v-model="text"
-					@change="() => $emit('updateContact', { key: item.input, value: text })" />
+					v-model="contactData[item.input]" />
 			</p>
 		</UBForm>
 
 		<UBFooter width="100%" class="modal-footer">
 			<UBButton :handleClick="handleCancel" text="Cancelar" class="btn-cancel" />
-			<UBButton :handleClick="handleSave" text="Salvar" class="btn-save" />
+			<UBButton :handleClick="handleContactSave" text="Salvar" class="btn-save" />
 		</UBFooter>
 		</UBModal>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, inject, onMounted } from 'vue';
 import UBForm from '@atoms/UBForm.vue';
 import UBModal from '@atoms/UBModal.vue';
 import UBLabel from '@atoms/UBLabel.vue';
@@ -32,6 +31,7 @@ import UBTextField from '@atoms/UBTextField.vue';
 import UBTitle from '@atoms/UBTitle.vue';
 import UBFooter from '@atoms/UBFooter.vue';
 import UBButton from '@atoms/UBButton.vue';
+import type ContactData from '@/models/contactData';
 
 export default defineComponent({
 	name: 'UBNewContactModal',
@@ -45,10 +45,6 @@ export default defineComponent({
 		UBButton
 	},
 	props: {
-		handleSave: {
-			type: Function,
-			required: true
-		},
 		handleCancel: {
 			type: Function,
 			required: true
@@ -57,9 +53,6 @@ export default defineComponent({
 			type: Boolean,
 			default: false
 		},
-		contact: {
-			type: Object
-		}
 	},
 	setup() {
 		const inputs = [
@@ -67,13 +60,15 @@ export default defineComponent({
 			{ input: 'email', label: 'E-mail' },
 			{ input: 'telephone', label: 'Telefone' }
 		];
-		const text = ref('');
+
+		const contactData = inject('contactData') as ContactData
+		const handleContactSave = inject('handleContactSave') as Function
 
 		onMounted(() => {
-			text.value = '';
+			Object.keys(contactData).forEach(key => delete contactData[key as keyof typeof contactData])
 		});
 
-		return { inputs, text };
+		return { handleContactSave, inputs, contactData };
 	}
 });
 </script>

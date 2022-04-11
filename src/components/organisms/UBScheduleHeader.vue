@@ -43,7 +43,6 @@ export default defineComponent({
 
 .wrapper {
 	display: flex;
-	padding: 10px;
 	align-items: center;
 }
 

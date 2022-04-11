@@ -11,8 +11,7 @@
 import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
 import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 import UBNewContact from '@organisms/UBNewContact.vue';
-import { defineComponent, onMounted } from 'vue';
-import { LocalStorageUtils } from '@/utils/local-storage-utils';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
 	name: 'UBHome',
@@ -21,11 +20,7 @@ export default defineComponent({
 		UBNewContact,
 		UBScheduleHeader
 	},
-	setup() {
-		onMounted(() => {
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
-		});
-	}
+
 });
 </script>
 

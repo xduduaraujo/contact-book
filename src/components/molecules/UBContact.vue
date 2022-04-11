@@ -7,18 +7,24 @@
 		<UBText :text="contact.name" class="ub-contact-info" />
 		<UBText :text="contact.email" class="ub-contact-info" />
 		<UBText :text="contact.telephone" class="ub-contact-info" />
+		<UBIcon alt="Edit Icon" :image="edit" width="16" height="16" class="ub-edit-icon" :onClick="() => { }" />
+		<UBIcon alt="Delete Icon" :image="deleteIcon" width="16" height="16" class="ub-delete-icon"
+			:onClick="deleteContact" />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import UBAvatar from '@atoms/UBAvatar.vue';
-import square from '@/assets/square.svg'
-import UBText from '@atoms/UBText.vue'
+import UBIcon from '@atoms/UBIcon.vue';
+import square from '@/assets/square.svg';
+import edit from '@/assets/edit.svg';
+import deleteIcon from '@/assets/delete.svg';
+import UBText from '@atoms/UBText.vue';
 
 export default defineComponent({
 	name: "UBContact",
-	components: { UBAvatar, UBText },
+	components: { UBAvatar, UBText, UBIcon },
 	props: {
 		contact: {
 			type: Object,
@@ -26,7 +32,9 @@ export default defineComponent({
 		}
 	},
 	setup() {
-		return { square }
+		const deleteContact = inject('deleteContact') as Function
+
+		return { square, deleteIcon, edit, deleteContact }
 	}
 });
 </script>
@@ -37,17 +45,16 @@ export default defineComponent({
 	height: 40px;
 	border-radius: 4px;
 	border: solid 1px var(--ub-white);
-	background-color: var(--ub-very-light-pink);
 }
 
 .ub-contact-info {
 	flex: 4;
-	margin: 12px 0 0 47px;
+	margin: 12px 0 0 0;
 	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	width: 100px; // some width
+	width: 100px;
 	font-size: 14px;
 }
 
@@ -57,6 +64,32 @@ export default defineComponent({
 	position: relative;
 	text-align: center;
 	color: white;
+}
+
+.ub-edit-icon {
+	max-width: 16px;
+	flex: 0.5;
+	position: relative;
+	text-align: center;
+	margin: 12px 12px 12px 12px;
+}
+
+.ub-delete-icon {
+	max-width: 16px;
+	flex: 0.5;
+	position: relative;
+	text-align: center;
+	margin: 12px 12px 12px 12px;
+}
+
+@media (max-width: 280px) {
+	.ub-delete-icon {
+		display: none;
+	}
+
+	.ub-edit-icon {
+		display: none;
+	}
 }
 
 .ub-first-letter-of-name {
