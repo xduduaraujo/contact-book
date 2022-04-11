@@ -1,5 +1,5 @@
 export default interface ContactData {
-  nome?: string;
-  email?: string;
-  telefone?: string;
+	name?: string;
+	email?: string;
+	telephone?: string;
 }

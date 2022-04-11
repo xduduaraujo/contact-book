@@ -1,12 +1,13 @@
 <template>
-	<img :alt="alt" :src="image" :width="width" :height="height" />
+	<img :alt="alt" :src="image" :width="width" :height="height" class="ub-avatar"/>
 </template>
+
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-	name: 'UBImage',
+	name: 'UBAvatar',
 	props: {
 		width: {
 			type: String,
@@ -27,3 +28,11 @@ export default defineComponent({
 	}
 });
 </script>
+
+<style lang="scss" scoped>
+.ub-avatar {
+	vertical-align: middle;
+	border-radius: 50%;
+	margin: 8px;
+}
+</style>

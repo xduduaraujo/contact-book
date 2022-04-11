@@ -1,13 +1,13 @@
 import { Rotas } from '@/enums/Rotas';
-import { useRouter } from 'vue-router';
+import router from '@/router';
 
 const getContactList = () => (localStorage.contactData ? JSON.parse(localStorage.contactData) : null);
 const contactListHasItems = () => !!getContactList();
 
 const LocalStorageUtils = {
-  getContactList: () => getContactList(),
-  contactListHasItems: () => contactListHasItems(),
-  pushToContactListIfHaveContactsInLocalStorage: () => contactListHasItems() && useRouter().push(Rotas.UBContacts)
+	getContactList: () => getContactList(),
+	contactListHasItems: () => contactListHasItems(),
+	checkRouterToGoBasedOnContactListInLocalStorage: () => contactListHasItems() ? router.push(Rotas.UBContacts) : router.push(Rotas.UBHome)
 };
 
 export { LocalStorageUtils };
