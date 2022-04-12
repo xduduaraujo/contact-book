@@ -24,12 +24,12 @@ export default defineComponent({
 
 		const contactData = reactive({} as ContactData);
 
-		const contacts = LocalStorageUtils.getContactList() || new Array<ContactData>();
+		const contacts = ObjectUtils.sortArrayOfContactDataByName(LocalStorageUtils.getContactList()) || new Array<ContactData>();
 
 		const filterForContacts = reactive({ value: '' })
 
 		const reactiveContacts = reactive({
-			data: ObjectUtils.sortArrayOfContactDataByName(contacts)
+			data: contacts
 		});
 
 		const contactIdToBeDeleted = reactive({ value: null });
