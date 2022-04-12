@@ -18,10 +18,10 @@ export default defineComponent({
   },
 
   setup() {
-    const showNewContactModal = inject('showNewContactModal');
+    const showNewContactModal = inject('showNewContactModal') as { value: boolean };
 
     const openNewContactModal = () => {
-      showNewContactModal.value = !showNewContactModal.value;
+      showNewContactModal.value = true;
     };
 
     return { plusIcon, openNewContactModal };

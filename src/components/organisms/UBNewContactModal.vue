@@ -76,7 +76,7 @@ export default defineComponent({
     });
 
     const formValidate = () => {
-      return !!contactData.name && !!contactData.email && contactData.telephone?.length >= 14;
+      return !!contactData.name && !!contactData.email && contactData.telephone && contactData.telephone?.length >= 14;
     };
 
     return { handleContactSave, inputs, contactData, formValidate };

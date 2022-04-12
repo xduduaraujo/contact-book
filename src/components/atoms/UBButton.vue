@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :color="color" :background-color="backgroundColor" @click="handleClick" :disabled="disabled">
+  <button type="button" :color="color" :background-color="backgroundColor" @click="handleClick()" :disabled="disabled">
     <slot />
     <span>{{ text }}</span>
   </button>

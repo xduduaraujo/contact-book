@@ -1,7 +1,7 @@
 <template>
   <div class="ub-contact">
     <div class="ub-contact-avatar">
-      <UBAvatar :alt="`${contact.name} Avatar`" width="24" height="24" :image="square" />
+      <UBAvatar :alt="`${contact.name} Avatar`" width="24" height="24" :image="square" v-if="contact.name" />
       <UBText :text="contact.name.charAt(0).toUpperCase()" class="ub-first-letter-of-name" />
     </div>
     <UBText :text="contact.name" class="ub-contact-info" />

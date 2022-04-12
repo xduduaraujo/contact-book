@@ -20,16 +20,21 @@ export default defineComponent({
   setup() {
     const contactData = reactive({} as ContactData);
     const contactDataArray = (inject('reactiveContacts') as ContactData[]) || new Array<ContactData>();
-    const showNewContactModal = inject('showNewContactModal');
+    const showNewContactModal = inject('showNewContactModal') as { value: boolean };
 
     function addNewContact(): void {
       const contactId = contactDataArray.length ?? 0;
       contactDataArray.push({ id: contactId, ...contactData });
+
       localStorage.setItem('contactData', JSON.stringify(contactDataArray));
 
+      clearContactDataFromInputs();
       showNewContactModal.value = false;
-      Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
       LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
+    }
+
+    function clearContactDataFromInputs(): void {
+      Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
     }
 
     function cancelNewContact(): void {
