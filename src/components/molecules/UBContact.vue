@@ -14,7 +14,7 @@
 			width="16"
 			height="16"
 			class="ub-delete-icon"
-			:onClick="deleteContact" />
+			:onClick="openDeleteContactModal" />
 	</div>
 </template>
 
@@ -26,6 +26,7 @@ import square from '@/assets/square.svg';
 import edit from '@/assets/edit.svg';
 import deleteIcon from '@/assets/delete.svg';
 import UBText from '@atoms/UBText.vue';
+import type ContactData from '@/models/contactData';
 
 export default defineComponent({
 	name: 'UBContact',
@@ -36,10 +37,17 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup() {
-		const deleteContact = inject('deleteContact') as Function;
+	setup(props) {
+		const showDeleteContactModal = inject('showDeleteContactModal') as { value: boolean }
+		const contactIdToBeDeleted = inject('contactIdToBeDeleted') as { value: number }
 
-		return { square, deleteIcon, edit, deleteContact };
+		const openDeleteContactModal = () => {
+			showDeleteContactModal.value = true
+			contactIdToBeDeleted.value = props.contact.id
+			console.log(contactIdToBeDeleted)
+		}
+
+		return { square, deleteIcon, edit, openDeleteContactModal };
 	}
 });
 </script>

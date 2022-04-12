@@ -68,11 +68,10 @@ export default defineComponent({
 		];
 
 		const contactData = inject('contactData') as ContactData;
-		const handleContactSave = inject('handleContactSave') as Function;
 
 		const formIsValid = () => !!contactData.name || !!contactData.email || !!(contactData.telephone && contactData.telephone.length >= 14)
 
-		return { handleContactSave, inputs, contactData, formIsValid };
+		return { inputs, contactData, formIsValid };
 	}
 });
 </script>
