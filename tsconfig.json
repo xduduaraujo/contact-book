@@ -2,7 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es6",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
