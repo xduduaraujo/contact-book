@@ -1,24 +1,23 @@
 <template>
-  <span class="ub-text">{{ text }}</span>
+	<span class="ub-text">{{ text }}</span>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'UBText',
-  props: {
-    text: {
-      type: String,
-      required: true
-    }
-  }
+	name: 'UBText',
+	props: {
+		text: {
+			type: String
+		}
+	}
 });
 </script>
 
 <style lang="scss" scoped>
 .ub-text {
-  text-align: center;
-  color: var(--ub-dark);
+	text-align: center;
+	color: var(--ub-dark);
 }
 </style>
