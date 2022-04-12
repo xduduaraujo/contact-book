@@ -1,13 +1,13 @@
 <template>
 	<div class="ub-contact">
 		<div class="ub-contact-avatar">
-			<UBAvatar :alt="`${contact.name} Avatar`" width="24" height="24" :image="square" v-if="contact.name" />
-			<UBText :text="contact.name?.charAt(0).toUpperCase()" class="ub-first-letter-of-name" />
+			<UBAvatar :alt="`${contactData.name} Avatar`" width="24" height="24" :image="square" v-if="contactData.name" />
+			<UBText :text="contactData.name?.charAt(0).toUpperCase()" class="ub-first-letter-of-name" />
 		</div>
-		<UBText :text="contact.name" class="ub-contact-info" />
-		<UBText :text="contact.email" class="ub-contact-info" />
-		<UBText :text="contact.telephone" class="ub-contact-info" />
-		<UBIcon alt="Edit Icon" :image="edit" width="16" height="16" class="ub-edit-icon" :onClick="() => { }" />
+		<UBText :text="contactData.name" class="ub-contact-info" />
+		<UBText :text="contactData.email" class="ub-contact-info" />
+		<UBText :text="contactData.telephone" class="ub-contact-info" />
+		<UBIcon alt="Edit Icon" :image="edit" width="16" height="16" class="ub-edit-icon" :onClick="openEditContactModal" />
 		<UBIcon
 			alt="Delete Icon"
 			:image="deleteIcon"
@@ -26,7 +26,6 @@ import square from '@/assets/square.svg';
 import edit from '@/assets/edit.svg';
 import deleteIcon from '@/assets/delete.svg';
 import UBText from '@atoms/UBText.vue';
-import type ContactData from '@/models/contactData';
 
 export default defineComponent({
 	name: 'UBContact',
@@ -38,16 +37,24 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
+		const contactData = { ...props.contact }
+
 		const showDeleteContactModal = inject('showDeleteContactModal') as { value: boolean }
+		const showEditContactModal = inject('showEditContactModal') as { value: boolean }
 		const contactIdToBeDeleted = inject('contactIdToBeDeleted') as { value: number }
+		const contactIdToBeEdited = inject('contactIdToBeEdited') as { value: number }
 
 		const openDeleteContactModal = () => {
 			showDeleteContactModal.value = true
 			contactIdToBeDeleted.value = props.contact.id
-			console.log(contactIdToBeDeleted)
 		}
 
-		return { square, deleteIcon, edit, openDeleteContactModal };
+		const openEditContactModal = () => {
+			showEditContactModal.value = true
+			contactIdToBeEdited.value = props.contact.id
+		}
+
+		return { square, deleteIcon, edit, openDeleteContactModal, openEditContactModal, contactData };
 	}
 });
 </script>
@@ -73,6 +80,7 @@ export default defineComponent({
 
 .ub-contact-avatar {
 	max-width: 48px;
+	min-width: 48px;
 	flex: 1.5;
 	position: relative;
 	text-align: center;

@@ -8,57 +8,38 @@
 		:isVisible="showDeleteContactModal.value"
 		:cancelDeleteContact="closeModals"
 		:deleteContact="deleteContact" />
+
+	<UBEditContactModal
+		:isVisible="showEditContactModal.value"
+		:cancelEditContact="closeModals"
+		:editContact="updateContact" />
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, reactive, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import UBNewContactModal from '@organisms/UBNewContactModal.vue';
 import UBDeleteContactModal from '@organisms/UBDeleteContactModal.vue';
-import type ContactData from '@/models/contactData';
-import { LocalStorageUtils } from '@/utils/local-storage-utils';
+import UBEditContactModal from '@organisms/UBEditContactModal.vue';
 
 export default defineComponent({
 	name: 'UBModals',
 	components: {
 		UBNewContactModal,
-		UBDeleteContactModal
+		UBDeleteContactModal,
+		UBEditContactModal
 	},
 	setup() {
-		const contactData = reactive({} as ContactData);
-
-
-		const contactDataArray = (inject('reactiveContacts') as ContactData[]) || new Array<ContactData>();
 		const showNewContactModal = inject('showNewContactModal') as { value: boolean };
 		const showEditContactModal = inject('showEditContactModal') as { value: boolean };
 		const showDeleteContactModal = inject('showDeleteContactModal') as { value: boolean };
 		const deleteContact = inject('deleteContact') as Function
+		const addNewContact = inject('addNewContact') as Function
+		const updateContact = inject('updateContact') as Function
+		const closeModals = inject('closeModals') as Function
 
 
-		function addNewContact(): void {
-			const contactId = contactDataArray.length ?? 0;
-			contactDataArray.push({ id: contactId, ...contactData });
 
-			localStorage.setItem('contactData', JSON.stringify(contactDataArray));
-
-			clearContactDataFromInputs();
-			showNewContactModal.value = false;
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
-		}
-
-		function clearContactDataFromInputs(): void {
-			Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
-		}
-
-		function closeModals(): void {
-			showNewContactModal.value = false;
-			showEditContactModal.value = false;
-			showDeleteContactModal.value = false;
-		}
-
-
-		provide('contactData', contactData);
-
-		return { showNewContactModal, showDeleteContactModal, closeModals, addNewContact, deleteContact };
+		return { showNewContactModal, showDeleteContactModal, showEditContactModal, closeModals, addNewContact, deleteContact, updateContact };
 	}
 });
 </script>

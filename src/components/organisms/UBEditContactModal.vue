@@ -1,6 +1,6 @@
 <template>
-	<UBContactModal :handleCancel="cancelNewContact" :handleSave="addNewContact" :showModal="isVisible"
-		title="Criar novo contato" />
+	<UBContactModal :handleCancel="cancelEditContact" :handleSave="editContact" :showModal="isVisible"
+		title="Editar contato" />
 </template>
 
 <script lang="ts">
@@ -13,11 +13,11 @@ export default defineComponent({
 		UBContactModal
 	},
 	props: {
-		addNewContact: {
+		editContact: {
 			type: Function,
 			required: true
 		},
-		cancelNewContact: {
+		cancelEditContact: {
 			type: Function,
 			required: true
 		},
@@ -28,3 +28,4 @@ export default defineComponent({
 	}
 });
 </script>
+

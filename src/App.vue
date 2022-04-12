@@ -11,6 +11,8 @@ import { defineComponent, onMounted, provide, reactive, computed } from 'vue';
 import { LocalStorageUtils } from '@/utils/local-storage-utils';
 import UBModals from '@templates/UBModals.vue';
 import type ContactData from '@/models/contactData';
+import ObjectUtils from '@/utils/object-utils'
+import StringUtils from '@/utils/string-utils'
 
 export default defineComponent({
 	name: 'App',
@@ -20,10 +22,18 @@ export default defineComponent({
 			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
 		})
 
+		const contactData = reactive({} as ContactData);
+
 		const contacts = LocalStorageUtils.getContactList() || new Array<ContactData>();
-		const reactiveContacts = reactive(contacts);
+
+		const filterForContacts = reactive({ value: '' })
+
+		const reactiveContacts = reactive({
+			data: ObjectUtils.sortArrayOfContactDataByName(contacts)
+		});
 
 		const contactIdToBeDeleted = reactive({ value: null });
+		const contactIdToBeEdited = reactive({ value: null });
 
 		const showNewContactModal = reactive({ value: false });
 		const showEditContactModal = reactive({ value: false });
@@ -33,23 +43,81 @@ export default defineComponent({
 			() => showNewContactModal.value || showEditContactModal.value || showDeleteContactModal.value
 		);
 
+		function addNewContact(): void {
+			const contactId = StringUtils.generateId()
+
+			reactiveContacts.data.push({ id: contactId, ...contactData });
+
+			localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
+
+			handleContactsChange()
+			clearContactDataFromInputs()
+		}
+
 		function deleteContact(): void {
-			const indexOfContactInsideArray = reactiveContacts.findIndex(
+			const indexOfContactInsideArray = reactiveContacts.data.findIndex(
 				(contactData: ContactData) => contactData.id === contactIdToBeDeleted.value
 			);
-			reactiveContacts.splice(indexOfContactInsideArray, 1);
 
-			localStorage.setItem('contactData', JSON.stringify(reactiveContacts));
+			reactiveContacts.data.splice(indexOfContactInsideArray, 1);
 
+			localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
 
-			showDeleteContactModal.value = false
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
+			handleContactsChange()
 		}
+
+		function updateContact(): void {
+			contactIdToBeDeleted.value = contactIdToBeEdited.value
+
+			deleteContact()
+			addNewContact()
+			handleContactsChange()
+		}
+
+		function filterContacts(): void {
+			reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts)
+
+			reactiveContacts.data = reactiveContacts.data.filter((contactData: ContactData) => contactData.name!.includes(filterForContacts.value))
+		}
+
+		function clearContactDataFromInputs(): void {
+			Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
+		}
+
+		function closeModals(): void {
+			showNewContactModal.value = false;
+			showEditContactModal.value = false;
+			showDeleteContactModal.value = false;
+		}
+
+		function resetIdToBeDeletedAndEdited() {
+			contactIdToBeDeleted.value = null
+			contactIdToBeEdited.value = null
+		}
+
+		function handleContactsChange() {
+			closeModals()
+			ObjectUtils.sortArrayOfContactDataByName(reactiveContacts.data)
+			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
+			resetIdToBeDeletedAndEdited()
+		}
+
+
+
+		provide('contactData', contactData);
 
 		provide('reactiveContacts', reactiveContacts);
 
+		provide('filterForContacts', filterForContacts)
+
 		provide('deleteContact', deleteContact)
+		provide('addNewContact', addNewContact)
+		provide('updateContact', updateContact)
+		provide('filterContacts', filterContacts)
+		provide('closeModals', closeModals)
+
 		provide('contactIdToBeDeleted', contactIdToBeDeleted)
+		provide('contactIdToBeEdited', contactIdToBeEdited)
 
 		provide('showNewContactModal', showNewContactModal);
 		provide('showEditContactModal', showEditContactModal);
