@@ -1,73 +1,78 @@
 <template>
-	<header class="wrapper">
-		<UBLogo class="ub-logo" />
-		<UBNewContact v-if="showNewContactOrganism" class="ub-new-contact" />
-		<UBSearchInput :class="`${showNewContactOrganism ? 'ub-si-with-button' : 'ub-si-without-button'}`" />
-		</header>
+  <header class="wrapper">
+    <UBLogo class="ub-logo" />
+    <UBCreateContactButton v-if="showNewContactButton" class="ub-new-contact" />
+    <UBSearchInput :class="`${showNewContactButton ? 'ub-si-with-button' : 'ub-si-without-button'}`" />
+  </header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import UBLogo from '@molecules/UBLogo.vue';
 import UBSearchInput from '@molecules/UBSearchInput.vue';
-import UBNewContact from '@organisms/UBNewContact.vue';
+import UBCreateContactButton from '@molecules/UBCreateContactButton.vue';
 
 export default defineComponent({
-	name: 'UBScheduleHeader',
-	components: {
-		UBLogo,
-		UBSearchInput,
-		UBNewContact
-	},
-	props: {
-		showNewContactOrganism: {
-			type: Boolean,
-			default: false
-		}
-	}
+  name: 'UBScheduleHeader',
+  components: {
+    UBLogo,
+    UBSearchInput,
+    UBCreateContactButton
+  },
+  props: {
+    showNewContactButton: {
+      type: Boolean,
+      default: false
+    }
+  }
 });
 </script>
 
 <style lang="scss" scoped>
 @media (min-width: 1440px) {
-	:deep(.ub-si-with-button .ub-search-input) {
-		margin: 0 0 0 1.5rem;
-	}
+  :deep(.ub-si-with-button .ub-search-input) {
+    margin: 0 0 0 1.5rem;
+  }
 }
 
 @media (min-width: 1440px) {
-	:deep(.ub-si-without-button .ub-search-input) {
-		margin: 0 0 0 14.25rem;
-	}
+  :deep(.ub-si-without-button .ub-search-input) {
+    margin: 0 0 0 14.25rem;
+  }
 }
 
 .wrapper {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 600px) {
-	.wrapper {
-		justify-content: space-between;
-		align-items: center;
-		flex-direction: column;
-		min-height: 6.25rem;
-	}
+  .wrapper {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    min-height: 6.25rem;
+  }
+
+  .ub-new-contact {
+    margin: 10px 0 10px 0 !important;
+  }
 }
 
 .ub-logo {
-	flex: 1
+  flex: 1;
 }
 
 .ub-new-contact {
-	flex: 3
+  max-width: 144px;
+  flex: 3;
 }
 
 .ub-si-with-button {
-	flex: 6
+  flex: 6;
 }
 
 .ub-si-without-button {
-	flex: 6
+  flex: 6;
 }
 </style>

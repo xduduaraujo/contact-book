@@ -6,9 +6,10 @@ const getContactList = (): ContactData[] => (localStorage.contactData ? JSON.par
 const contactListHasItems = () => !!getContactList() && getContactList().length > 0;
 
 const LocalStorageUtils = {
-	getContactList: () => getContactList(),
-	contactListHasItems: () => contactListHasItems(),
-	checkRouterToGoBasedOnContactListInLocalStorage: () => contactListHasItems() ? router.push(Rotas.UBContacts) : router.push(Rotas.UBHome)
+  getContactList: () => getContactList(),
+  contactListHasItems: () => contactListHasItems(),
+  checkRouterToGoBasedOnContactListInLocalStorage: () =>
+    contactListHasItems() ? router.push(Rotas.UBContacts) : router.push(Rotas.UBHome)
 };
 
 export { LocalStorageUtils };
