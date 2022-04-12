@@ -17,8 +17,9 @@ export default defineComponent({
 	components: { RouterView, UBModals },
 	setup() {
 		onMounted(() => {
-			// LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage()
+			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage()
 		});
+
 		const contacts = LocalStorageUtils.getContactList() || new Array<ContactData>();
 		const reactiveContacts = reactive(contacts);
 
