@@ -1,8 +1,8 @@
 <template>
-	<RouterView />
-	<div class="ub-modal-backdrop" v-show="modalIsOpened">
-		<UBModals />
-	</div>
+  <RouterView />
+  <div class="ub-modal-backdrop" v-show="modalIsOpened">
+    <UBModals />
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,120 +11,120 @@ import { defineComponent, onMounted, provide, reactive, computed } from 'vue';
 import { LocalStorageUtils } from '@/utils/local-storage-utils';
 import UBModals from '@templates/UBModals.vue';
 import type ContactData from '@/models/contactData';
-import ObjectUtils from '@/utils/object-utils'
-import StringUtils from '@/utils/string-utils'
+import ObjectUtils from '@/utils/object-utils';
+import StringUtils from '@/utils/string-utils';
 
 export default defineComponent({
-	name: 'App',
-	components: { RouterView, UBModals },
-	setup() {
-		onMounted(() => {
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
-		})
+  name: 'App',
+  components: { RouterView, UBModals },
+  setup() {
+    onMounted(() => {
+      LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
+    });
 
-		const contactData = reactive({} as ContactData);
+    const contactData = reactive({} as ContactData);
 
-		const contacts = LocalStorageUtils.getContactList() || new Array<ContactData>();
+    const contacts = LocalStorageUtils.getContactList() || new Array<ContactData>();
 
-		const filterForContacts = reactive({ value: '' })
+    const filterForContacts = reactive({ value: '' });
 
-		const reactiveContacts = reactive({
-			data: ObjectUtils.sortArrayOfContactDataByName(contacts)
-		});
+    const reactiveContacts = reactive({
+      data: ObjectUtils.sortArrayOfContactDataByName(contacts)
+    });
 
-		const contactIdToBeDeleted = reactive({ value: null });
-		const contactIdToBeEdited = reactive({ value: null });
+    const contactIdToBeDeleted = reactive({ value: null });
+    const contactIdToBeEdited = reactive({ value: null });
 
-		const showNewContactModal = reactive({ value: false });
-		const showEditContactModal = reactive({ value: false });
-		const showDeleteContactModal = reactive({ value: false });
+    const showNewContactModal = reactive({ value: false });
+    const showEditContactModal = reactive({ value: false });
+    const showDeleteContactModal = reactive({ value: false });
 
-		const modalIsOpened = computed(
-			() => showNewContactModal.value || showEditContactModal.value || showDeleteContactModal.value
-		);
+    const modalIsOpened = computed(
+      () => showNewContactModal.value || showEditContactModal.value || showDeleteContactModal.value
+    );
 
-		function addNewContact(): void {
-			const contactId = StringUtils.generateId()
+    function addNewContact(): void {
+      const contactId = StringUtils.generateId();
 
-			reactiveContacts.data.push({ id: contactId, ...contactData });
+      reactiveContacts.data.push({ id: contactId, ...contactData });
 
-			localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
+      localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
 
-			handleContactsChange()
-			clearContactDataFromInputs()
-		}
+      handleContactsChange();
+      clearContactDataFromInputs();
+    }
 
-		function deleteContact(): void {
-			const indexOfContactInsideArray = reactiveContacts.data.findIndex(
-				(contactData: ContactData) => contactData.id === contactIdToBeDeleted.value
-			);
+    function deleteContact(): void {
+      const indexOfContactInsideArray = reactiveContacts.data.findIndex(
+        (contactData: ContactData) => contactData.id === contactIdToBeDeleted.value
+      );
 
-			reactiveContacts.data.splice(indexOfContactInsideArray, 1);
+      reactiveContacts.data.splice(indexOfContactInsideArray, 1);
 
-			localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
+      localStorage.setItem('contactData', JSON.stringify(reactiveContacts.data));
 
-			handleContactsChange()
-		}
+      handleContactsChange();
+    }
 
-		function updateContact(): void {
-			contactIdToBeDeleted.value = contactIdToBeEdited.value
+    function updateContact(): void {
+      contactIdToBeDeleted.value = contactIdToBeEdited.value;
 
-			deleteContact()
-			addNewContact()
-			handleContactsChange()
-		}
+      deleteContact();
+      addNewContact();
+      handleContactsChange();
+    }
 
-		function filterContacts(): void {
-			reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts)
+    function filterContacts(): void {
+      reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts);
 
-			reactiveContacts.data = reactiveContacts.data.filter((contactData: ContactData) => contactData.name!.includes(filterForContacts.value))
-		}
+      reactiveContacts.data = reactiveContacts.data.filter((contactData: ContactData) =>
+        contactData.name!.includes(filterForContacts.value)
+      );
+    }
 
-		function clearContactDataFromInputs(): void {
-			Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
-		}
+    function clearContactDataFromInputs(): void {
+      Object.keys(contactData).forEach((key) => delete contactData[key as keyof typeof contactData]);
+    }
 
-		function closeModals(): void {
-			showNewContactModal.value = false;
-			showEditContactModal.value = false;
-			showDeleteContactModal.value = false;
-		}
+    function closeModals(): void {
+      showNewContactModal.value = false;
+      showEditContactModal.value = false;
+      showDeleteContactModal.value = false;
+    }
 
-		function resetIdToBeDeletedAndEdited() {
-			contactIdToBeDeleted.value = null
-			contactIdToBeEdited.value = null
-		}
+    function resetIdToBeDeletedAndEdited() {
+      contactIdToBeDeleted.value = null;
+      contactIdToBeEdited.value = null;
+    }
 
-		function handleContactsChange() {
-			closeModals()
-			ObjectUtils.sortArrayOfContactDataByName(reactiveContacts.data)
-			LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
-			resetIdToBeDeletedAndEdited()
-		}
+    function handleContactsChange() {
+      closeModals();
+      ObjectUtils.sortArrayOfContactDataByName(reactiveContacts.data);
+      LocalStorageUtils.checkRouterToGoBasedOnContactListInLocalStorage();
+      resetIdToBeDeletedAndEdited();
+    }
 
+    provide('contactData', contactData);
 
+    provide('reactiveContacts', reactiveContacts);
 
-		provide('contactData', contactData);
+    provide('filterForContacts', filterForContacts);
 
-		provide('reactiveContacts', reactiveContacts);
+    provide('deleteContact', deleteContact);
+    provide('addNewContact', addNewContact);
+    provide('updateContact', updateContact);
+    provide('filterContacts', filterContacts);
+    provide('closeModals', closeModals);
 
-		provide('filterForContacts', filterForContacts)
+    provide('contactIdToBeDeleted', contactIdToBeDeleted);
+    provide('contactIdToBeEdited', contactIdToBeEdited);
 
-		provide('deleteContact', deleteContact)
-		provide('addNewContact', addNewContact)
-		provide('updateContact', updateContact)
-		provide('filterContacts', filterContacts)
-		provide('closeModals', closeModals)
+    provide('showNewContactModal', showNewContactModal);
+    provide('showEditContactModal', showEditContactModal);
+    provide('showDeleteContactModal', showDeleteContactModal);
 
-		provide('contactIdToBeDeleted', contactIdToBeDeleted)
-		provide('contactIdToBeEdited', contactIdToBeEdited)
-
-		provide('showNewContactModal', showNewContactModal);
-		provide('showEditContactModal', showEditContactModal);
-		provide('showDeleteContactModal', showDeleteContactModal);
-
-		return { reactiveContacts, modalIsOpened };
-	}
+    return { reactiveContacts, modalIsOpened };
+  }
 });
 </script>
 
@@ -133,25 +133,25 @@ export default defineComponent({
 @import '@/assets/overrides.scss';
 
 .ub-modal-backdrop {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #app {
-	max-width: 100vw;
-	margin: 1rem;
-	font-weight: normal;
+  max-width: 100vw;
+  margin: 1rem;
+  font-weight: normal;
 }
 
 header {
-	line-height: 1.5;
-	max-height: 100vh;
+  line-height: 1.5;
+  max-height: 100vh;
 }
 </style>

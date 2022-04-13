@@ -1,51 +1,51 @@
 /* color palette from <https://github.com/vuejs/theme> */
 
 :root {
-	--ub-white: #e1e1e1;
+  --ub-white: #e1e1e1;
 
-	--ub-white-two: #ffffff;
+  --ub-white-two: #ffffff;
 
-	--ub-grey: #e4e7f4;
+  --ub-grey: #e4e7f4;
 
-	--ub-bluey-grey: #9198af;
+  --ub-bluey-grey: #9198af;
 
-	--ub-pale-grey: #e4e7f4;
+  --ub-pale-grey: #e4e7f4;
 
-	--ub-orange: #fa7268;
+  --ub-orange: #fa7268;
 
-	--ub-dark: #2a2d3b;
+  --ub-dark: #2a2d3b;
 
-	--ub-light-yellowish-green: #dbff90;
+  --ub-light-yellowish-green: #dbff90;
 
-	--ub-very-light-pink: #fff3f2;
+  --ub-very-light-pink: #fff3f2;
 }
 
 /* semantic color variables for this project */
 :root {
-	--color-background: #f8f9fd;
-	--color-label: var(--ub-bluey-grey);
+  --color-background: #f8f9fd;
+  --color-label: var(--ub-bluey-grey);
 
-	--section-gap: 160px;
+  --section-gap: 160px;
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 body {
-	min-height: 100vh;
-	background: var(--color-background);
-	transition: color 0.5s, background-color 0.5s;
-	line-height: 1.6;
-	font-family: Roboto;
-	font-size: 16px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	scroll-behavior: smooth;
+  min-height: 100vh;
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  scroll-behavior: smooth;
 }
