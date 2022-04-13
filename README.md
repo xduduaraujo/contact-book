@@ -1,4 +1,4 @@
-# schedule-front
+# contact-book
 
 ## Project setup
 ```
