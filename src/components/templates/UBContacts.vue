@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import UBEmptySchedule from '@organisms/UBEmptySchedule.vue';
 import UBScheduleHeader from '@organisms/UBScheduleHeader.vue';
 import UBContactList from '@organisms/UBContactList.vue';
 import type ContactData from '@/models/contactData';
@@ -14,7 +13,6 @@ import type ContactData from '@/models/contactData';
 export default defineComponent({
   name: 'UBContacts',
   components: {
-    UBEmptySchedule,
     UBScheduleHeader,
     UBContactList
   },

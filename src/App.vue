@@ -77,8 +77,8 @@ export default defineComponent({
     function filterContacts(): void {
       reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts);
 
-      reactiveContacts.data = reactiveContacts.data.filter((contactData: ContactData) =>
-        contactData.name!.includes(filterForContacts.value)
+      reactiveContacts.data = reactiveContacts.data.filter(
+        (contactData: ContactData) => contactData.name && contactData.name.includes(filterForContacts.value)
       );
     }
 
