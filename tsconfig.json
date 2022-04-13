@@ -2,11 +2,10 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["esnext"],
     "strict": true,
-    "baseUrl": ".",
+    "outDir": "dist",
+    "target": "ESNext",
+    "module": "ESNext",
     "paths": {
       "@/*": ["./src/*"],
       "@atoms/*": ["./src/components/atoms/*"],
