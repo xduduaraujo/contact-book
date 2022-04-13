@@ -53,6 +53,8 @@ export default defineComponent({
 		const openEditContactModal = () => {
 			showEditContactModal.value = true
 			contactData.name = props.contact.name
+			contactData.email = props.contact.email
+			contactData.telephone = props.contact.telephone
 			contactIdToBeEdited.value = props.contact.id
 		}
 
