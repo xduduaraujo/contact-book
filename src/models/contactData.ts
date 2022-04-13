@@ -1,6 +1,7 @@
 export default interface ContactData {
-  id?: string;
-  name?: string;
-  email?: string;
-  telephone?: string;
+	[key: string]: string | undefined;
+	id?: string;
+	name?: string;
+	email?: string;
+	telephone?: string;
 }
