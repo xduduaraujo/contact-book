@@ -11,7 +11,8 @@
 					class="ub-text-field"
 					backgroundColor="#ffffff"
 					border="solid 1px #c0c3d2"
-					v-model="contactData[item.input]"
+					:value="contactData[item.input]"
+					@update:value="(v) => contactData[item.input] = v"
 					v-maska="item.mask" />
 			</p>
 		</UBForm>

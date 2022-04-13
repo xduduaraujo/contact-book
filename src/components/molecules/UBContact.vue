@@ -1,12 +1,12 @@
 <template>
 	<div class="ub-contact">
 		<div class="ub-contact-avatar">
-			<UBAvatar :alt="`${contactData.name} Avatar`" width="24" height="24" :image="square" v-if="contactData.name" />
-			<UBText :text="contactData.name?.charAt(0).toUpperCase()" class="ub-first-letter-of-name" />
+			<UBAvatar :alt="`${contact.name} Avatar`" width="24" height="24" :image="square" v-if="contact.name" />
+			<UBText :text="contact.name?.charAt(0).toUpperCase()" class="ub-first-letter-of-name" />
 		</div>
-		<UBText :text="contactData.name" class="ub-contact-info" />
-		<UBText :text="contactData.email" class="ub-contact-info" />
-		<UBText :text="contactData.telephone" class="ub-contact-info" />
+		<UBText :text="contact.name" class="ub-contact-info" />
+		<UBText :text="contact.email" class="ub-contact-info" />
+		<UBText :text="contact.telephone" class="ub-contact-info" />
 		<UBIcon alt="Edit Icon" :image="edit" width="16" height="16" class="ub-edit-icon" :onClick="openEditContactModal" />
 		<UBIcon
 			alt="Delete Icon"
@@ -26,6 +26,7 @@ import square from '@/assets/square.svg';
 import edit from '@/assets/edit.svg';
 import deleteIcon from '@/assets/delete.svg';
 import UBText from '@atoms/UBText.vue';
+import type ContactData from '@/models/contactData';
 
 export default defineComponent({
 	name: 'UBContact',
@@ -37,7 +38,7 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
-		const contactData = { ...props.contact }
+		const contactData = inject('contactData') as ContactData
 
 		const showDeleteContactModal = inject('showDeleteContactModal') as { value: boolean }
 		const showEditContactModal = inject('showEditContactModal') as { value: boolean }
@@ -51,10 +52,11 @@ export default defineComponent({
 
 		const openEditContactModal = () => {
 			showEditContactModal.value = true
+			contactData.name = props.contact.name
 			contactIdToBeEdited.value = props.contact.id
 		}
 
-		return { square, deleteIcon, edit, openDeleteContactModal, openEditContactModal, contactData };
+		return { square, deleteIcon, edit, openDeleteContactModal, openEditContactModal };
 	}
 });
 </script>

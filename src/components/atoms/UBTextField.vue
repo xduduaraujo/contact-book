@@ -5,12 +5,13 @@
 		:name="name"
 		:id="name"
 		class="ub-text-field"
-		v-model="text"
+		v-model="val"
+		@input="handleInput"
 		:placeholder="placeholder" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
 	name: 'UBTextField',
@@ -31,14 +32,24 @@ export default defineComponent({
 		},
 		backgroundColor: {
 			type: String
+		},
+		value: {
+			type: String
 		}
 	},
-	setup() {
-		const text = ref('');
+	setup(props, { emit }) {
 
-		return { text };
+		const val = ref(props.value)
+
+		function handleInput() {
+			emit('update:value', val)
+		}
+
+		return { val, handleInput };
 	}
+
 });
+
 </script>
 
 <style lang="scss" scoped>
