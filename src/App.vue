@@ -82,7 +82,9 @@ export default defineComponent({
 
       reactiveContacts.data = reactiveContacts.data.filter(
         (contactData: ContactData) =>
-          contactData.name && contactData.name.toUpperCase().includes(filterForContacts.value.toUpperCase())
+          (contactData.name && contactData.name.toUpperCase().includes(filterForContacts.value.toUpperCase())) ||
+          (contactData.email && contactData.email.toUpperCase().includes(filterForContacts.value.toUpperCase())) ||
+          (contactData.telephone && contactData.telephone.includes(filterForContacts.value))
       );
     }
 
