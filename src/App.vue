@@ -58,6 +58,8 @@ export default defineComponent({
     }
 
     function deleteContact(): void {
+      reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts);
+
       const indexOfContactInsideArray = reactiveContacts.data.findIndex(
         (contactData: ContactData) => contactData.id === contactIdToBeDeleted.value
       );
@@ -71,6 +73,7 @@ export default defineComponent({
 
     function updateContact(): void {
       contactIdToBeDeleted.value = contactIdToBeEdited.value;
+      console.log(contactIdToBeDeleted);
 
       deleteContact();
       addNewContact();
