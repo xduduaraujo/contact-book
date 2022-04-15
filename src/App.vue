@@ -87,8 +87,12 @@ export default defineComponent({
         (contactData: ContactData) =>
           (contactData.name && contactData.name.toUpperCase().includes(filterForContacts.value.toUpperCase())) ||
           (contactData.email && contactData.email.toUpperCase().includes(filterForContacts.value.toUpperCase())) ||
-          (contactData.telephone && contactData.telephone.includes(filterForContacts.value))
+          (contactData.telephone && cleanMaskForTelephone(contactData.telephone).includes(filterForContacts.value))
       );
+    }
+
+    function cleanMaskForTelephone(telephone: string): string {
+      return telephone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '');
     }
 
     function clearContactDataFromInputs(): void {
