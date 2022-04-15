@@ -78,7 +78,8 @@ export default defineComponent({
       reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts);
 
       reactiveContacts.data = reactiveContacts.data.filter(
-        (contactData: ContactData) => contactData.name && contactData.name.includes(filterForContacts.value)
+        (contactData: ContactData) =>
+          contactData.name && contactData.name.toUpperCase().includes(filterForContacts.value.toUpperCase())
       );
     }
 
