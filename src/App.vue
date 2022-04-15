@@ -44,6 +44,8 @@ export default defineComponent({
     );
 
     function addNewContact(): void {
+      reactiveContacts.data = ObjectUtils.sortArrayOfContactDataByName(contacts);
+
       const contactId = StringUtils.generateId();
 
       reactiveContacts.data.push({ id: contactId, ...contactData });
@@ -52,6 +54,7 @@ export default defineComponent({
 
       handleContactsChange();
       clearContactDataFromInputs();
+      filterContacts();
     }
 
     function deleteContact(): void {
