@@ -10,9 +10,8 @@ I used this project to apply some new concepts to me like:
 - localStorage 
 
 ## Preview
-```
 You can see this application running here:
 https://contact-book-ten.vercel.app/
-```
+
 
 
