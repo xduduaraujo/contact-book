@@ -1,20 +1,18 @@
 # contact-book
 
-## Project setup
+## Project Meaning 
+I used this project to apply some new concepts to me like: 
+
+- Provide/Inject by Vue 3
+- Composition API
+- Atomic Design
+- Responsivity
+- localStorage 
+
+## Preview
 ```
-yarn install
+You can see this application running here:
+https://contact-book-ten.vercel.app/
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn dev
-```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
